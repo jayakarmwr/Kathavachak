@@ -1,0 +1,80 @@
+*{
+    margin:0;
+    padding:0;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.imageBlock{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: purple;
+}
+.LoginBlock{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.heading{
+    font-size: 2.5rem;
+    color: purple;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 30px;
+}
+form{
+    height: 350px;
+    width: 350px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Login{
+    font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.input-box{
+    margin-bottom: 10px;
+}
+.input-box input{
+    width: 250px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.forgot{
+    width:71%;
+    text-align: left;
+}
+button{
+    width: 250px;
+    padding: 10px;
+    background-color:purple;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+.register{
+    margin-top: 10px;
+}
