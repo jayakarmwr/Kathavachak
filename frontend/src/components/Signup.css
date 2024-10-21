@@ -2,13 +2,13 @@
     margin:0;
     padding:0;
 }
-.container{
+.container-1{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
-.imageBlock{
+.imageBlock-1{
     flex: 1;
     display: flex;
     justify-content: center;
@@ -17,7 +17,7 @@
     width: 50vw;
     background-color: purple;
 }
-.LoginBlock{
+.Signup-Block{
     flex:1;
     display: flex;
     flex-direction: column;
@@ -39,16 +39,16 @@ form{
     justify-content: center;
     align-items: center;
 }
-.Login{
+.Signup{
     font-size: 2rem;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-bottom: 3vh;
     text-align: center;
 }
-.input-box{
+.input-box-1{
     margin-bottom: 2vh;
 }
-.input-box input{
+.input-box-1 input{
     width: 20vw;
     padding: 2%;
     font-size: 1rem;
@@ -56,13 +56,9 @@ form{
     border-radius: 4px;
     box-sizing: border-box;
 }
-.input-box:hover{
+.input-box-1:hover{
     border:1px solid black;
     border-radius: 4px;
-}
-.forgot{
-    width:67%;
-    text-align: left;
 }
 .button{
     width: 20vw;
@@ -79,6 +75,6 @@ form{
     border: 1.5px solid black;
     border-radius: 4px;
 }
-.register{
+.login{
     margin-top:3%;
 }

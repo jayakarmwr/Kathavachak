@@ -8,8 +8,7 @@ const Login = () => {
             
         </div>
         <div className='LoginBlock'>
-            {/* <h1 className='heading'>Katha Vaachak</h1> */}
-            <form action=''>
+            <form>
                 <h1 className='Login'>Login</h1>
                 <div className='input-box'>
                     <input type='text' placeholder='Username' required/>
@@ -20,9 +19,9 @@ const Login = () => {
                 <div className="forgot">
                         <a href="#">Forgot Password?</a>
                 </div>
-                <button type='submit'>Login</button>
+                <button type='submit' className='button'>Login</button>
                 <div className="register">
-                    <p>Don't have an account? <a href="#">Register</a></p>
+                    <p>Don't have an account? <a href="/signup">Signup</a></p>
                 </div>
             </form>
         </div>
