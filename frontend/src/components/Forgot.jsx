@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
 const Forgot = () => {
-    const { token } = useParams(); // Get the token from the URL
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
@@ -12,15 +12,13 @@ const Forgot = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Check if passwords match
         if (password !== confirm) {
             alert("Passwords do not match");
             return;
         }
         
         try {
-            const response = await axios.post("http://localhost:3000/en/change-password", { email, password, confirm, token });
+            const response = await axios.post("http://localhost:3000/en/change-password", { email, password, confirm });
             const data = response.data.msg; 
             if (data === 'ok') {
                 alert("Password updated successfully");
@@ -37,7 +35,6 @@ const Forgot = () => {
     return (
         <div className='container'>
             <div className='imageBlock'>
-                {/* Optional Image Block */}
             </div>
             <div className='LoginBlock'>
                 <form onSubmit={handleSubmit}>

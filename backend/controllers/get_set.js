@@ -23,9 +23,6 @@ const login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({ msg: "Incorrect password" });
         }
-
-        // Generate a JWT token (if needed)
-        // const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         
         res.status(200).json({ msg: "ok" }); 
     } catch (error) {
@@ -55,11 +52,8 @@ const signup = async (req, res) => {
         const newUser = new User({
             username,
             email,
-            // You can add other fields if necessary
         });
         await newUser.save();
-
-        // Generate confirmation token (using JWT or a simple token)
         const token = jwt.sign({ email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         // Send confirmation email
@@ -104,33 +98,30 @@ const signup = async (req, res) => {
 
 
 const confirmPassword = async (req, res) => {
-    const { password, confirm, token } = req.body; // Get password, confirmation, and token from request
+    const { password, confirm, token } = req.body; 
 
-    // Check if the passwords match
     if (password !== confirm) {
         return res.status(400).json({ msg: "Passwords do not match" });
     }
 
     try {
-        // Verify the token
+        
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const email = decoded.email; // Extract email from the token
+        const email = decoded.email; 
 
-        // Hash the new password
+        
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Find the user by email and update their password
         const user = await User.findOneAndUpdate(
             { email },
             { password: hashedPassword },
-            { new: true } // Returns the updated user document
+            { new: true } 
         );
 
         if (!user) {
             return res.status(404).json({ msg: "User not found" });
         }
 
-        res.status(200).json({ msg: "ok" }); // Send a success response
+        res.status(200).json({ msg: "ok" }); 
     } catch (error) {
         console.error("Error updating password:", error);
         res.status(500).json({ msg: "Server error" });
@@ -139,30 +130,25 @@ const confirmPassword = async (req, res) => {
 
 
 const changePassword = async (req, res) => {
-    const { email, password, confirm, token } = req.body; // Ensure you get the email and passwords from the request
-
-    // Check if the passwords match
+    const { email, password, confirm } = req.body; 
     if (password !== confirm) {
         return res.status(400).json({ msg: "Passwords do not match" });
     }
 
     try {
-        // Hash the new password
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Find the user by email and update their password
         const user = await User.findOneAndUpdate(
             { email },
             { password: hashedPassword },
-            { new: true } // Returns the updated user document
+            { new: true } 
         );
 
         if (!user) {
             return res.status(404).json({ msg: "User not found" });
         }
 
-        // You might want to invalidate the token here or remove it if you have a token system
-        res.status(200).json({ msg: "ok" }); // Send a success response
+        
+        res.status(200).json({ msg: "ok" }); 
     } catch (error) {
         console.error("Error updating password:", error);
         res.status(500).json({ msg: "Server error" });
