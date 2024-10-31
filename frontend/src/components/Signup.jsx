@@ -1,29 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react';
+import axios from 'axios';
 import './Signup.css';
 
 const Signup = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/en/signup", {
+        username,
+        email
+      });
+      alert("Signup successful: " + response.data.msg);
+    } catch (error) {
+      console.error("There was an error signing up:", error);
+      alert("Signup failed. Please try again.");
+    }
+  };
+
   return (
     <div className='container-1'>
-        <div className='imageBlock-1'>
-            
-        </div>
-        <div className='Signup-Block'>
-            <form>
-                <h1 className='Signup'>Signup</h1>
-                <div className='input-box-1'>
-                    <input type='text' placeholder='Username' required/>
-                </div>
-                <div className='input-box-1'>
-                    <input type='text' placeholder='Email-id' required/>
-                </div>
-                <button type='submit' className='button'>Signup</button>
-                <div className="login">
-                    <p>Already have an account? <a href="/login">Login</a></p>
-                </div>
-            </form>
-        </div>
+      <div className='imageBlock-1'>
+       
+      </div>
+      <div className='Signup-Block'>
+        <form onSubmit={handleSubmit}>
+          <h1 className='Signup'>Signup</h1>
+          <div className='input-box-1'>
+            <input
+              type='text'
+              placeholder='Username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className='input-box-1'>
+            <input
+              type='email'
+              placeholder='Email-id'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <button type='submit' className='button'>Signup</button>
+          <div className="login">
+            <p>Already have an account? <a href="/login">Login</a></p>
+          </div>
+        </form>
+      </div>
     </div>
-    
   )
 }
+
 export default Signup;
