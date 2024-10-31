@@ -7,18 +7,16 @@ require('dotenv').config();
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    console.log("Login attempt:", { email, password });
 
     try {
         const user = await User.findOne({ email });
-        console.log("User found:", user);
 
         if (!user) {
             return res.status(404).json({ msg: "User not found" });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        console.log("Password valid:", isPasswordValid);
+        
 
         if (!isPasswordValid) {
             return res.status(401).json({ msg: "Incorrect password" });
