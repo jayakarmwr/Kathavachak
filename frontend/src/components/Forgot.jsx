@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css';
+import './Forgot.css'; // Change to use Forgot.css
+import image from '../assets/image.png';
 
 const Forgot = () => {
-    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
@@ -34,36 +34,34 @@ const Forgot = () => {
 
     return (
         <div className='container'>
-            <div className='imageBlock'>
-            </div>
             <div className='LoginBlock'>
                 <form onSubmit={handleSubmit}>
                     <h1 className='Login'>Enter New Password</h1>
                     <div className='input-box'>
-                        <input 
-                            type='email' 
-                            placeholder='Email' 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            required 
+                        <input
+                            type='email'
+                            placeholder='Email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
                         />
                     </div>
                     <div className='input-box'>
-                        <input 
-                            type='password' 
-                            placeholder='New Password' 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
+                        <input
+                            type='password'
+                            placeholder='New Password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
                         />
                     </div>
                     <div className='input-box'>
-                        <input 
-                            type='password' 
-                            placeholder='Confirm Password' 
-                            value={confirm} 
-                            onChange={(e) => setConfirm(e.target.value)} 
-                            required 
+                        <input
+                            type='password'
+                            placeholder='Confirm Password'
+                            value={confirm}
+                            onChange={(e) => setConfirm(e.target.value)}
+                            required
                         />
                     </div>
                     <button type='submit' className='button'>SUBMIT</button>

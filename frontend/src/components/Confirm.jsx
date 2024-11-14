@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
+import image from '../assets/image.png'
 
 const Confirm = () => {
     const { token } = useParams(); 
@@ -34,7 +35,7 @@ const Confirm = () => {
     return (
         <div className='container'>
             <div className='imageBlock'>
-                {/* Optional Image Block */}
+            <img src={image} style={{ width: '100%', height: '100%', objectFit:'cover'}}/>
             </div>
             <div className='LoginBlock'>
                 <form onSubmit={handleSubmit}>
