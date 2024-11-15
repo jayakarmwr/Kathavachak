@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css';
+import './Confirm.css';
 import image from '../assets/image.png'
 
 const Confirm = () => {
@@ -20,8 +20,8 @@ const Confirm = () => {
         try {
             const response = await axios.post("http://localhost:3000/en/confirm", { password, confirm, token });
             const data = response.data.msg; 
-            if (data === 'ok') {
-                alert("Password updated successfully");
+            if (data === 'Email confirmed and password set successfully.') {
+                alert("Email confirmed and password set successfully.");
                 navigate("/login");
             } else {
                 alert("Failed to update password: " + data);
@@ -34,9 +34,7 @@ const Confirm = () => {
 
     return (
         <div className='container'>
-            <div className='imageBlock'>
-            <img src={image} style={{ width: '100%', height: '100%', objectFit:'cover'}}/>
-            </div>
+        
             <div className='LoginBlock'>
                 <form onSubmit={handleSubmit}>
                     <h1 className='Login'>Enter New Password</h1>

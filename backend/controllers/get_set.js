@@ -50,6 +50,8 @@ const signup = async (req, res) => {
         const newUser = new User({
             username,
             email,
+            isConfirmed: false,
+            createdAt: new Date(),
         });
         await newUser.save();
         const token = jwt.sign({ email: newUser.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
@@ -96,35 +98,33 @@ const signup = async (req, res) => {
 
 
 const confirmPassword = async (req, res) => {
-    const { password, confirm, token } = req.body; 
+    const { password, confirm, token } = req.body;
 
     if (password !== confirm) {
         return res.status(400).json({ msg: "Passwords do not match" });
     }
 
     try {
-        
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const email = decoded.email; 
+        const email = decoded.email;
 
-        
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await User.findOneAndUpdate(
-            { email },
-            { password: hashedPassword },
-            { new: true } 
-        );
-
-        if (!user) {
-            return res.status(404).json({ msg: "User not found" });
+        const user = await User.findOne({ email });
+        if (!user || user.isConfirmed) {
+            return res.status(404).json({ msg: "Invalid or expired token" });
         }
 
-        res.status(200).json({ msg: "ok" }); 
+        const hashedPassword = await bcrypt.hash(password, 10);
+        user.password = hashedPassword;
+        user.isConfirmed = true; // Mark the user as confirmed
+        await user.save();
+
+        res.status(200).json({ msg: "Email confirmed and password set successfully." });
     } catch (error) {
-        console.error("Error updating password:", error);
+        console.error("Error confirming email:", error);
         res.status(500).json({ msg: "Server error" });
     }
 };
+
 
 
 const changePassword = async (req, res) => {
@@ -140,6 +140,7 @@ const changePassword = async (req, res) => {
             { password: hashedPassword },
             { new: true } 
         );
+        
 
         if (!user) {
             return res.status(404).json({ msg: "User not found" });
